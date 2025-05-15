@@ -52,13 +52,15 @@ public:
 
     void show();
 
-    void list();
+    static void list();
 
     void add();
 
     void remove();
 
-    static void save(const Task &task);
+    void update(const char * what, const char *what2);
+
+    void save();
 };
 
 #endif //TASK_H
