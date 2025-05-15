@@ -51,3 +51,8 @@ cmake-build-release/
 
 # Windows
 Thumbs.db
+
+# Libs
+/libs/**/*.o
+/libs/**/*.a
+/libs/**/*.so
