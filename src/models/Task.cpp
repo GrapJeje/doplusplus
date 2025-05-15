@@ -4,8 +4,8 @@
 
 #include "Task.h"
 #include <fstream>
-#include "utils/Line.cpp"
-#include "utils/Json.cpp"
+#include "utils/Line.h"
+#include "utils/Json.h"
 #include <cstring>
 
 std::vector<Task> Task::tasks;
@@ -26,7 +26,7 @@ void Task::list() {
     }
 }
 
-void Task::add() {
+void Task::add(const int &id, const std::string &name, const std::string &description, const std::string &status, const std::string &deadline) {
     tasks.emplace_back(id, name, description, status, deadline);
 }
 
@@ -43,7 +43,20 @@ void Task::update(const char* what, const char* what2) {
     else if (strcmp(what, "description") == 0) this->description = what2;
     else if (strcmp(what, "status") == 0) this->status = what2;
     else if (strcmp(what, "deadline") == 0) this->deadline = what2;
-    else std::cerr << "Onbekend veld: " << what << std::endl;
+    else {
+        std::cerr << "Onbekend veld: " << what << std::endl;
+        return;
+    }
+
+    for (auto& task : tasks) {
+        if (task.id == this->id) {
+            if (strcmp(what, "name") == 0) task.name = what2;
+            else if (strcmp(what, "description") == 0) task.description = what2;
+            else if (strcmp(what, "status") == 0) task.status = what2;
+            else if (strcmp(what, "deadline") == 0) task.deadline = what2;
+            break;
+        }
+    }
 }
 
 void Task::save() {

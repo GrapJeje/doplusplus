@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 
-#include "json.hpp"
+#include "Json.hpp"
 using json = nlohmann::json;
 
 class Task {
@@ -50,11 +50,19 @@ public:
         }
     }
 
+    static int getNextId() {
+        int maxId = 0;
+        for (const auto &task : tasks) {
+            if (task.id > maxId) maxId = task.id;
+        }
+        return maxId + 1;
+    }
+
     void show();
 
     static void list();
 
-    void add();
+    static void add(const int &id, const std::string &name, const std::string &description, const std::string &status, const std::string &deadline);
 
     void remove();
 
